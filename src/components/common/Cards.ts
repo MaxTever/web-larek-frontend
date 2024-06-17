@@ -23,10 +23,10 @@ export class Card extends Component<IProduct> {
             this._title = ensureElement<HTMLElement>(`.card__title`, container);
             this._price = ensureElement<HTMLElement>(`.card__price`, container);
 
-            this._image = container.querySelector(`card__image`)
+            this._image = container.querySelector(`.card__image`)
             this._category = container.querySelector(`.card__category`)
             this._button = container.querySelector(`.card__button`);
-            this._description = container.querySelector(`.card__description`);
+            this._description = container.querySelector(`.card__text`);
 
             if (actions?.onClick){
                 if (this._button){
@@ -71,6 +71,7 @@ export class Card extends Component<IProduct> {
       set category(value: string){
         this.setText(this._category, value);
         if (this._category){
+          this._category.classList.remove(`card__category_other`);
           this._category.classList.add(`card__category_${categories.get(value) ? categories.get(value) : 'other'}`);
         }
         

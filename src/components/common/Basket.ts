@@ -21,7 +21,6 @@ export class Basket extends View<IBasketView> {
         this._total = this.container.querySelector('.basket__price');
         this._button  = this.container.querySelector('.basket__button');
 
-
         if (this._button){
             this._button.addEventListener('click', () => {
                 events.emit('order:open');
@@ -36,6 +35,11 @@ export class Basket extends View<IBasketView> {
         if (items.length)  {
             this._list.replaceChildren(...items);
             this.setDisabled(this._button, false);
+            items.forEach((item, index) => {
+                item.querySelectorAll('.basket__item-index').forEach(node => {
+                    node.textContent = String(index + 1);
+                });
+            });
         } else {
             this._list.replaceChildren(
                 createElement<HTMLParagraphElement>('p', {
@@ -55,6 +59,8 @@ export class Basket extends View<IBasketView> {
             this.setDisabled(this._button, true);
         }
     }
+
+
 
     set total(total: number)  {
         this.setText(this._total, `${total} синапсов`);

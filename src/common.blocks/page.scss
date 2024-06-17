@@ -13,5 +13,6 @@ html, body.page {
 
 	&_locked {
 		position: fixed;
+		overflow: hidden;
 	}
 }
